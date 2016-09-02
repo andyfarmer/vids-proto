@@ -7,11 +7,21 @@ module.exports = function(grunt) {
         },
         dest : 'src/seriesdata.csv'
       }
+    },
+    convert: {
+      options: {
+        explicitArray: false,
+      },
+      csv2json: {
+        src: ['src/seriesdata.csv'],
+        dest: 'build/seriesdata.json'
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-http');
+  grunt.loadNpmTasks('grunt-convert');
 
-  grunt.registerTask('data', ['http']);
+  grunt.registerTask('data', ['http', 'convert']);
 
 };
