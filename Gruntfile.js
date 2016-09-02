@@ -1,12 +1,6 @@
 module.exports = function(grunt) {
   var images =[];
 
-  var bannersData = grunt.file.readJSON('build/seriesdata.json');
-
-  bannersData.forEach(function(image){
-    images.push(image.BannerURL);
-  });
-
   grunt.initConfig({
     http: {
       grab_data: {
@@ -22,7 +16,7 @@ module.exports = function(grunt) {
       },
       csv2json: {
         src: ['src/seriesdata.csv'],
-        dest: 'build/seriesdata.json'
+        dest: 'build/data/seriesdata.json'
       }
     },
     download: {
@@ -39,6 +33,13 @@ module.exports = function(grunt) {
 
   grunt.registerTask('data', ['http', 'convert']);
 
-  grunt.registerTask('images', ['download']);
+  grunt.registerTask('images', function(){
+    var bannersData = grunt.file.readJSON('build/data/seriesdata.json');
+
+    bannersData.forEach(function(image){
+      images.push(image.BannerURL);
+    });
+    grunt.task.run('download');
+  });
 
 };
