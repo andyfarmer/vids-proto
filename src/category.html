@@ -1,0 +1,8 @@
+<h1>{{category}}</h1>
+
+<label>Search: <input ng-model="searchText"></label>
+<ul>
+    <li ng-repeat="program in programs | filter:searchText">
+        {{program}}
+    </li>
+</ul>
