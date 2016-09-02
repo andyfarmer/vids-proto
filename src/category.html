@@ -1,8 +1,20 @@
 <h1>{{category}}</h1>
 
+<img src="{{bannerImage}}"/>
+
+<h2>Featured {{category}}</h2>
+<ul>
+    <li ng-repeat="program in featured">
+        <a href="/series/{{program.id}}">
+          {{program.name}}<br/>
+          <img src="series-banners/{{program.thumbnailImage}}" width="300"/>
+        </a>
+    </li>
+</ul>
+
 <label>Search: <input ng-model="searchText"></label>
 <ul>
     <li ng-repeat="program in programs | filter:searchText">
-        {{program}}
+        <a href="/series/{{program.id}}">{{program.name}}</a>
     </li>
 </ul>
